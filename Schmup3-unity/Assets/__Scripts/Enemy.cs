@@ -10,8 +10,8 @@ public class Enemy : MonoBehaviour
     public float speed = 10f; 
     public float fireRate=.3f;
     public float health = 10; 
-    public int score = 100; 
-
+    public int score = 100;
+    private boundsScript bndCheck;
 
     public Vector3 pos
     {
@@ -24,13 +24,23 @@ public class Enemy : MonoBehaviour
             this.transform.position = value;
         }
     }
- 
- 
+
+    private void Awake()
+    {
+        bndCheck = GetComponent<boundsScript>();
+    }
+
+
 
     // Update is called once per frame
     void Update()
     {
-        Move();   
+        Move();
+
+        if (bndCheck!=null && bndCheck.offDown)
+        {    
+          Destroy(gameObject); 
+        }
     }
 
     public virtual void Move()
