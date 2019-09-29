@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
         {
             Destroy(otherGo);
             Destroy(gameObject);
-            print("hit");
+            
         }
         else
         {
