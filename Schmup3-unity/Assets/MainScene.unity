@@ -220,7 +220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 996287651}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CockPit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,6 +242,90 @@ Transform:
   m_Father: {fileID: 1858165739}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1115852371
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1034791559613230007, guid: 32f164bfcfcb6418e953170f965de435,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034791559613230007, guid: 32f164bfcfcb6418e953170f965de435,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034791559613230000, guid: 32f164bfcfcb6418e953170f965de435,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034791559613230000, guid: 32f164bfcfcb6418e953170f965de435,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034791559613230000, guid: 32f164bfcfcb6418e953170f965de435,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034791559613230000, guid: 32f164bfcfcb6418e953170f965de435,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034791559613230000, guid: 32f164bfcfcb6418e953170f965de435,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034791559613230000, guid: 32f164bfcfcb6418e953170f965de435,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034791559613230000, guid: 32f164bfcfcb6418e953170f965de435,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034791559613230000, guid: 32f164bfcfcb6418e953170f965de435,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034791559613230000, guid: 32f164bfcfcb6418e953170f965de435,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034791559613230000, guid: 32f164bfcfcb6418e953170f965de435,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034791559613230000, guid: 32f164bfcfcb6418e953170f965de435,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034791558856800547, guid: 32f164bfcfcb6418e953170f965de435,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034791559477268014, guid: 32f164bfcfcb6418e953170f965de435,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 32f164bfcfcb6418e953170f965de435, type: 3}
 --- !u!1 &1133583214
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +460,7 @@ GameObject:
   - component: {fileID: 1336940756}
   - component: {fileID: 1336940755}
   - component: {fileID: 1336940754}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -468,7 +552,7 @@ GameObject:
   - component: {fileID: 1639462960}
   - component: {fileID: 1639462959}
   - component: {fileID: 1639462958}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -560,9 +644,9 @@ GameObject:
   - component: {fileID: 1858165741}
   - component: {fileID: 1858165740}
   - component: {fileID: 1858165742}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: _Hero
-  m_TagString: Untagged
+  m_TagString: Hero
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -615,7 +699,11 @@ MonoBehaviour:
   speed: 30
   rollMult: -45
   pitchMult: 30
-  shieldLevel: 1
+  gameRestartDelay: 2
+  projectilePrefab: {fileID: 407763580827844359, guid: 03647c1f2f1e6498991207f710459e1f,
+    type: 3}
+  projectileSpeed: 40
+  _shieldLevel: 4
 --- !u!114 &1858165742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,7 +737,8 @@ GameObject:
   - component: {fileID: 1919929477}
   - component: {fileID: 1919929476}
   - component: {fileID: 1919929475}
-  m_Layer: 0
+  - component: {fileID: 1919929478}
+  m_Layer: 8
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -730,3 +819,16 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1919929473}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!135 &1919929478
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919929473}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
