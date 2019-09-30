@@ -15,6 +15,13 @@ public class Enemy_1 : Enemy
     // Start is called before the first frame update
 
 
+
+    void Start()
+    {
+        x0 = pos.x;
+        birthTime = Time.time;
+
+    }
     public override void Move()
     {
         Vector3 tempPos = pos;
@@ -29,15 +36,14 @@ public class Enemy_1 : Enemy
 
 
         base.Move();
-    }
-    void Start()
-    {
-        
+
+       // print(bndCheck.isOnScreen);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+
+    //// Update is called once per frame
+    //void Update()
+    //{
         
-    }
+    //}
 }

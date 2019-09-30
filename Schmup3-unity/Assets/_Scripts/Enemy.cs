@@ -11,7 +11,8 @@ public class Enemy : MonoBehaviour
     public float fireRate=.3f;
     public float health = 10; 
     public int score = 100;
-    private boundsScript bndCheck;
+
+    protected boundsScript bndCheck;
 
     public Vector3 pos
     {
