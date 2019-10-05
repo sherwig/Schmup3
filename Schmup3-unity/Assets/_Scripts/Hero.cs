@@ -13,7 +13,7 @@ public class Hero : MonoBehaviour
     public float pitchMult = 30;
     public float gameRestartDelay = 2f;
     public GameObject projectilePrefab;
-    public float projectileSpeed = 40; 
+    public float projectileSpeed = 40;
 
     [Header("Set Dynamically")]
     // Start is called before the first frame update
@@ -22,6 +22,9 @@ public class Hero : MonoBehaviour
     private float _shieldLevel = 1;
     private GameObject lastTriggerGo = null;
 
+
+    public delegate void WeaponFireDelegate();
+    public WeaponFireDelegate fireDelegate;
     void Awake()
     {
         if (s==null)
@@ -32,6 +35,8 @@ public class Hero : MonoBehaviour
         {
             Debug.LogError("Hero.Awake() - Attempted to assign second Hero.s");
         }
+
+        //fireDelegate += TempFire;
         
     }
 
@@ -50,9 +55,15 @@ public class Hero : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    TempFire();
+        //}
+
+        if (Input.GetAxis("Jump")==1 && fireDelegate!=null)
         {
-            TempFire();
+            fireDelegate();
+
         }
 
     }
@@ -62,7 +73,12 @@ public class Hero : MonoBehaviour
         GameObject projGo = Instantiate<GameObject>(projectilePrefab);
         projGo.transform.position = transform.position;
         Rigidbody rigidB = projGo.GetComponent<Rigidbody>();
-        rigidB.velocity = Vector3.up * projectileSpeed;
+        //rigidB.velocity = Vector3.up * projectileSpeed;
+
+        Projectile proj = projGo.GetComponent<Projectile>();
+        proj.type = WeaponType.blaster;
+        float tspeed = Main.getWeaponDefinition(proj.type).velocity;
+        rigidB.velocity = Vector3.up * tspeed;
     }
 
     private void OnTriggerEnter(Collider other)

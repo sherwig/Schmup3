@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 public class Main : MonoBehaviour
 {
     static public Main s;
+    static Dictionary <WeaponType, WeaponDefinition> WEAP_DICT;
+
 
     [Header("Set in Inspector")]
     public GameObject[] prefabEnemies;
     public float enemySpawnPerSecond = .5f;
     public float enemyDefaultPadding = 1.5f;
+    public WeaponDefinition[] weaponDefinitions; 
 
     private boundsScript bndCheck;
     
@@ -21,6 +24,12 @@ public class Main : MonoBehaviour
         bndCheck = GetComponent<boundsScript>();
 
         Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
+
+        WEAP_DICT = new Dictionary<WeaponType, WeaponDefinition>();
+        foreach(WeaponDefinition def in weaponDefinitions)
+        {
+            WEAP_DICT[def.type] = def;
+        }
 
         
     }
@@ -57,6 +66,21 @@ public class Main : MonoBehaviour
     {
         SceneManager.LoadScene("MainScene");
     }
+
+
+    static public WeaponDefinition getWeaponDefinition(WeaponType wt)
+    {
+        if (WEAP_DICT.ContainsKey(wt))
+        {
+            return (WEAP_DICT[wt]);
+        }
+
+        return (new WeaponDefinition());
+
+    }
+
+
+
     //// Update is called once per frame
     //void Update()
     //{
