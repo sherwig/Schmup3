@@ -66,7 +66,7 @@ public class Weapon : MonoBehaviour
 
     public WeaponType type
     {
-        get { return (_type); }
+        get { return(_type); }
         set { SetType(value); }
     }
 
