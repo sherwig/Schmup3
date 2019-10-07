@@ -60,7 +60,7 @@ public class Hero : MonoBehaviour
         //    TempFire();
         //}
 
-        if (Input.GetAxis("Jump")==1 && fireDelegate!=null)
+        if (Input.GetAxis("Jump") == 1f && fireDelegate!=null)
         {
             fireDelegate();
 
@@ -68,18 +68,18 @@ public class Hero : MonoBehaviour
 
     }
 
-    void TempFire()
-    {
-        GameObject projGo = Instantiate<GameObject>(projectilePrefab);
-        projGo.transform.position = transform.position;
-        Rigidbody rigidB = projGo.GetComponent<Rigidbody>();
-        //rigidB.velocity = Vector3.up * projectileSpeed;
+    //void TempFire()
+    //{
+    //    GameObject projGo = Instantiate<GameObject>(projectilePrefab);
+    //    projGo.transform.position = transform.position;
+    //    Rigidbody rigidB = projGo.GetComponent<Rigidbody>();
+    //    //rigidB.velocity = Vector3.up * projectileSpeed;
 
-        Projectile proj = projGo.GetComponent<Projectile>();
-        proj.type = WeaponType.blaster;
-        float tspeed = Main.getWeaponDefinition(proj.type).velocity;
-        rigidB.velocity = Vector3.up * tspeed;
-    }
+    //    Projectile proj = projGo.GetComponent<Projectile>();
+    //    proj.type = WeaponType.blaster;
+    //    float tspeed = Main.getWeaponDefinition(proj.type).velocity;
+    //    rigidB.velocity = Vector3.up * tspeed;
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
