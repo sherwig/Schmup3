@@ -6,7 +6,8 @@ public class Enemy : MonoBehaviour
 {
 
     public int score = 100;
-    public float showDamageDuration = .1f; 
+    public float showDamageDuration = .1f;
+    public float powerUpDropChance = 1f;
 
     [Header("Set in Inspector: Enemy")]
 
@@ -17,7 +18,8 @@ public class Enemy : MonoBehaviour
     public Material[] materials;
     public bool showingdamage = false;
     public float damageDoneTime;
-    public bool notifiedOfDestruction = false; 
+    public bool notifiedOfDestruction = false;
+    
 
     protected boundsScript bndCheck;
 
@@ -82,6 +84,7 @@ public class Enemy : MonoBehaviour
                 showDamage();
                 if (!bndCheck.isOnScreen)
                 {
+                   
                     Destroy(otherGo);
                     break;
                 }
@@ -89,6 +92,11 @@ public class Enemy : MonoBehaviour
                 health -= Main.getWeaponDefinition(p.type).damageOnHit;
                 if(health<=0)
                 {
+                    if (!notifiedOfDestruction)
+                    {
+                        Main.s.ShipDestroyed(this);
+                    }
+                    notifiedOfDestruction = true;
                     Destroy(this.gameObject);
                 }
 
