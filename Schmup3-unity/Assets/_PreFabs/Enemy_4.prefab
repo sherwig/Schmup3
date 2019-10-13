@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5915968430539626441}
   - component: {fileID: 5915968430539626446}
   - component: {fileID: 5915968430539626447}
-  - component: {fileID: 5915968430539626440}
+  - component: {fileID: 4993755664115701640}
   m_Layer: 9
   m_Name: WingL
   m_TagString: Untagged
@@ -79,8 +79,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &5915968430539626440
-SphereCollider:
+--- !u!136 &4993755664115701640
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -89,8 +89,9 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5915968430594926211
 GameObject:
@@ -103,6 +104,7 @@ GameObject:
   - component: {fileID: 5915968430594926210}
   - component: {fileID: 5915968430594926209}
   - component: {fileID: -6449832830516123588}
+  - component: {fileID: 6488700933924847013}
   m_Layer: 9
   m_Name: Enemy_4
   m_TagString: Enemy
@@ -156,6 +158,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57dd2e02ffbc64d489c247cc4f1b860e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 100
+  showDamageDuration: 0.1
+  powerUpDropChance: 1
+  speed: 10
+  fireRate: 0.3
+  health: 10
+  orignalColors: []
+  materials: []
+  showingdamage: 0
+  damageDoneTime: 0
+  notifiedOfDestruction: 0
+  parts:
+  - name: CockPit
+    health: 10
+    protectedBy:
+    - FuseLage
+    go: {fileID: 0}
+    mat: {fileID: 0}
+  - name: Fuselage
+    health: 10
+    protectedBy:
+    - WingL
+    - WingR
+    go: {fileID: 0}
+    mat: {fileID: 0}
+  - name: WingL
+    health: 10
+    protectedBy: []
+    go: {fileID: 0}
+    mat: {fileID: 0}
+  - name: WingR
+    health: 10
+    protectedBy: []
+    go: {fileID: 0}
+    mat: {fileID: 0}
+--- !u!114 &6488700933924847013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5915968430594926211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54fb923bc64c04fc688b9ac6545937c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 3.5
+  keepOnScreen: 0
+  isOnScreen: 1
+  camWidth: 0
+  camHeight: 0
+  offRight: 0
+  offLeft: 0
+  offUp: 0
+  offDown: 0
 --- !u!1 &5915968430727015850
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +317,7 @@ GameObject:
   - component: {fileID: 5915968431591317821}
   - component: {fileID: 5915968431591317954}
   - component: {fileID: 5915968431591317955}
-  - component: {fileID: 5915968431591317820}
+  - component: {fileID: 5210141606224632176}
   m_Layer: 9
   m_Name: WingR
   m_TagString: Untagged
@@ -327,8 +385,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &5915968431591317820
-SphereCollider:
+--- !u!136 &5210141606224632176
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -337,9 +395,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Height: 1.0000002
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.00000071525574, z: 0}
 --- !u!1 &5915968432348503685
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,7 +410,7 @@ GameObject:
   - component: {fileID: 5915968432348503684}
   - component: {fileID: 5915968432348503689}
   - component: {fileID: 5915968432348503690}
-  - component: {fileID: 5915968432348503691}
+  - component: {fileID: 223409649469101632}
   m_Layer: 9
   m_Name: Fuselage
   m_TagString: Untagged
@@ -419,8 +478,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &5915968432348503691
-SphereCollider:
+--- !u!136 &223409649469101632
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -429,6 +488,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
