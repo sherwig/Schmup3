@@ -40,11 +40,11 @@ public class Parallax : MonoBehaviour
 
 		if (tY>=0)
 		{
-			panels[1].transform.position = new Vector3(tx, tY - panelheight, depth);
+			panels[1].transform.position = new Vector3(tx, tY - panelHt, depth);
 		}
         else
 		{
-			panels[1].transform.position = new Vector3(tx, tY + panelheight, depth);
+			panels[1].transform.position = new Vector3(tx, tY + panelHt, depth);
 		}
     }
 }
