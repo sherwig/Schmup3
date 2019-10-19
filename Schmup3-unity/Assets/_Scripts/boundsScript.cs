@@ -15,6 +15,7 @@ public class boundsScript : MonoBehaviour
 
     [HideInInspector]
     public bool offRight, offLeft, offUp, offDown;
+    public bool heroDown;
 
     // Start is called before the first frame update
     void Awake()
@@ -55,9 +56,17 @@ public class boundsScript : MonoBehaviour
         if (pos.y < -camHeight + radius)
         {
             pos.y = -camHeight + radius;
+            //print(pos.y);
             isOnScreen = false;
             offDown = true;
         }
+
+        //if (pos.y<-camHeight-15)
+        //{
+        //    pos.y = -camHeight-15;
+        //    print(pos.y);
+        //    heroDown = true;
+        //}
 
         
         isOnScreen = !(offRight || offLeft || offUp || offDown);

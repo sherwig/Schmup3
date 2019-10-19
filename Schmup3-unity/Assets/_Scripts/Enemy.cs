@@ -19,7 +19,8 @@ public class Enemy : MonoBehaviour
     public bool showingdamage = false;
     public float damageDoneTime;
     public bool notifiedOfDestruction = false;
-    
+    private int kill = 0;
+
 
     protected boundsScript bndCheck;
 
@@ -82,16 +83,19 @@ public class Enemy : MonoBehaviour
             case "ProjectileHero":
                 Projectile p = otherGo.GetComponent<Projectile>();
                 showDamage();
+                kill = 0;
                 if (!bndCheck.isOnScreen)
                 {
-                   
+                    
                     Destroy(otherGo);
                     break;
                 }
 
+                
                 health -= Main.getWeaponDefinition(p.type).damageOnHit;
                 if(health<=0)
                 {
+                    kill = 1;
                     if (!notifiedOfDestruction)
                     {
                         Main.s.ShipDestroyed(this);
@@ -100,6 +104,7 @@ public class Enemy : MonoBehaviour
                     Destroy(this.gameObject);
                 }
 
+               
                 Destroy(otherGo);
                 break;
 
@@ -107,6 +112,7 @@ public class Enemy : MonoBehaviour
                 print("Enemy hit by non-projectileHero: " + otherGo.name);
                 break;
         }
+        ScoreScript.S.UpdateScore(kill);
     }
 
     void showDamage()

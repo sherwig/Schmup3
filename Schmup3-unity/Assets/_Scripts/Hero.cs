@@ -9,23 +9,39 @@ public class Hero : MonoBehaviour
     [Header("Set in Inspector")]
 
     public float speed = 30;
+   
+    public float speedHolder;
     public float rollMult = -45;
     public float pitchMult = 30;
     public float gameRestartDelay = 2f;
     public GameObject projectilePrefab;
     public float projectileSpeed = 40;
     public Weapon[] weapons;
+    Vector3 moveDirectionPush;
+    public Rigidbody HeroRigidbody;
+    bool shooting = false;
+    
+    public float pushDoneTime;
+    public float invincibillity;
+    public float invincibillityDuration = 1.5f;
+    bool invin;
+    public Material[] materials;
+    public Color[] orignalColors;
+
+
+    // int
 
     [Header("Set Dynamically")]
-    // Start is called before the first frame update
-
     [SerializeField]
     private float _shieldLevel = 1;
     private GameObject lastTriggerGo = null;
-
-
+    protected boundsScript bndCheck;
     public delegate void WeaponFireDelegate();
     public WeaponFireDelegate fireDelegate;
+    public float pushSpeed = -5;
+    public float pushDuration = .1f;
+
+    // Start is called before the first frame update
     void Start()
     {
         if (s==null)
@@ -38,38 +54,124 @@ public class Hero : MonoBehaviour
         {
             Debug.LogError("Hero.Awake() - Attempted to assign second Hero.s");
         }
+
         ClearWeapons();
         weapons[0].SetType(WeaponType.blaster);
 
         //fireDelegate += TempFire;
+        bndCheck = GetComponent<boundsScript>();
+        HeroRigidbody = GetComponent<Rigidbody>();
+        speedHolder = speed;
+
+        materials = Utils.GetAllMaterials(gameObject);
+        orignalColors = new Color[materials.Length];
+
+        for (int i = 0; i < materials.Length; i++)
+        {
+            orignalColors[i] = materials[i].color;
+        }
+
+        print(invincibillityDuration);
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(Weapon.type);
+        // Debug.Log(WEAP_DICT[def.type]);
+        //Debug.Log(weapons[0].type);
+
         float xAxis = Input.GetAxis("Horizontal");
         float yAxis = Input.GetAxis("Vertical");
 
         Vector3 pos = transform.position;
 
-        pos.x += xAxis * speed * Time.deltaTime;
-        pos.y += yAxis * speed * Time.deltaTime;
+        if (!shooting)
+        {
+            pos.x += xAxis * speed * Time.deltaTime;
+            pos.y += yAxis * speed * Time.deltaTime;
+            
+        }
+        else
+        {
+            //print("here2");
+
+            //WeaponType current = Weapon.get();
+
+            pos.y += pushSpeed * Time.deltaTime;
+            pos.x += xAxis * speed * Time.deltaTime;
+        }
+
+        if (shooting && Time.time > pushDoneTime)
+        {
+            //print("here3");
+            dontPushBack();
+        }
 
         transform.position = pos;
 
         transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);
+
 
         //if (Input.GetKeyDown(KeyCode.Space))
         //{
         //    TempFire();
         //}
 
+        if (Time.time > invincibillity)
+        {
+            invin = false;
+            //GetComponent<Renderer>().material.color = Color.white;
+            for (int i = 0; i < materials.Length; i++)
+            {
+                materials[i].color = orignalColors[i];
+            }
+        }
+
         if (Input.GetAxis("Jump") == 1f && fireDelegate!=null)
         {
             fireDelegate();
+            PushBack();
 
+            //print("here");
+
+            //moveDirectionPush = HeroRigidbody.transform.position;
+            ////- other.transform.position;
+
+            //HeroRigidbody.AddForce(moveDirectionPush.normalized * 200f);
+
+            //Vector3 pushBack = -transform.up * 100;
+            //HeroRigidbody.AddForce(pushBack);
+
+            //HeroRigidbody.AddForce(new Vector3(0, -300f, 0));
+
+            //Vector3 pos2 = transform.position;
+            //Vector3 pushBack = -transform.up * 100;
+
+
+            //pos2.y += yAxis * speed * Time.deltaTime;
+            //transform.position = pos2;
+            //transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);
         }
+
+       if( weapons[0].type==WeaponType.blaster)
+        {
+            pushDuration = .5f;
+            pushSpeed = -20;
+        }
+
+       else if(weapons[0].type == WeaponType.spread)
+        {
+            pushDuration = .8f;
+            pushSpeed = -40;
+        }
+
+        //if (bndCheck.heroDown)
+        //{
+        //    print("Off" );
+        //    shieldLevel--;
+        //}
 
     }
 
@@ -86,28 +188,95 @@ public class Hero : MonoBehaviour
     //    rigidB.velocity = Vector3.up * tspeed;
     //}
 
+    private void OnTriggerStay(Collider other)
+    {
+        Transform rootT = other.gameObject.transform.root;
+        GameObject go = rootT.gameObject;
+        lastTriggerGo = go;
+
+        if (invin)
+        {
+            return;
+        }
+
+        else if (go.tag == "offDownCube")
+        {
+
+            shieldLevel--;
+            Invincibillity(invincibillityDuration);
+        }
+
+    }
+    //private void OnCollisionEnter(Collision other)
+    //{
+    //    print("here");
+
+    //    Transform rootT = other.gameObject.transform.root;
+    //    GameObject go = rootT.gameObject;
+    //    lastTriggerGo = go;
+
+
+    //    //if (invin)
+    //    //{
+    //    //    return;
+
+    //    if (invin)
+    //    {
+    //        return;
+    //    }
+
+    //    if(go.tag=="offDownCube")
+    //    {
+    //        shieldLevel--;
+    //        Invincibillity(invincibillityDuration);
+    //    }
+
+
+    //}
+
     private void OnTriggerEnter(Collider other)
     {
         Transform rootT = other.gameObject.transform.root;
         GameObject go = rootT.gameObject;
 
+        //if (go==lastTriggerGo)
+        //{
+        //    return;
+        //}
 
-        if(go==lastTriggerGo)
+        lastTriggerGo = go;
+
+        if (invin)
         {
             return;
         }
-        lastTriggerGo = go;
+
+
+        //print(go.tag);
+
+        
+
         if (go.tag=="Enemy")
         {
             shieldLevel--;
             Destroy(go);
-
+            Invincibillity(invincibillityDuration);
         }
 
         else if(go.tag=="PowerUp")
         {
             AbsorbPowerUp(go);
+            
         }
+
+        //else if (go.tag == "offDownCube")
+        //{
+        //    shieldLevel--;
+        //    //print("hit");
+        //    Invincibillity(invincibillityDuration);
+        //}
+
+
         else
         {
             print("Triggered by non-Enemy: " + go.name);
@@ -142,6 +311,7 @@ public class Hero : MonoBehaviour
                 break;
         }
         pu.AbsorbedBy(this.gameObject);
+
     }
 
     public float shieldLevel
@@ -164,6 +334,15 @@ public class Hero : MonoBehaviour
 
     }
 
+    //public float type
+    //{
+
+    //    get
+    //    {
+    //        return (_type);
+    //    }
+    //}
+
     Weapon GetEmptyWeaponSlot()
     {
         for (int i=0; i<weapons.Length; i++)
@@ -183,5 +362,36 @@ public class Hero : MonoBehaviour
         {
             w.SetType(WeaponType.none);
         }
+    }
+
+    void PushBack()
+    {
+        shooting = true;
+        //speed = pushSpeed;
+        pushDoneTime = Time.time * pushDuration;
+
+
+    }
+
+    void dontPushBack()
+    {
+
+        shooting = false;
+        //speed = speedHolder; 
+
+    }
+
+    void Invincibillity(float duration)
+    {
+        invin = true;
+        invincibillity = Time.time+duration;
+
+        // GetComponent<Renderer>().material.color=Color.blue;
+
+        foreach (Material m in materials)
+        {
+            m.color = Color.blue;
+        }
+
     }
 }
