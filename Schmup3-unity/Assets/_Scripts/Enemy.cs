@@ -5,13 +5,14 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    public int score = 100;
+    //public int score = 100;
     public float showDamageDuration = .1f;
     public float powerUpDropChance = 1f;
+   
 
-    [Header("Set in Inspector: Enemy")]
-
-    public float speed = 10f; 
+   [Header("Set in Inspector: Enemy")]
+    public float speed=10f;
+    public ScoreScript score;
     public float fireRate=.3f;
     public float health = 10;
     public Color[] orignalColors;
@@ -20,6 +21,7 @@ public class Enemy : MonoBehaviour
     public float damageDoneTime;
     public bool notifiedOfDestruction = false;
     private int kill = 0;
+    float perlin = 3;
 
 
     protected boundsScript bndCheck;
@@ -38,7 +40,9 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        //speed = 10f;
         bndCheck = GetComponent<boundsScript>();
+       // score = GetComponent<ScoreScript>().UpdateScore();
 
         materials = Utils.GetAllMaterials(gameObject);
         orignalColors = new Color[materials.Length];
@@ -52,9 +56,14 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //speed = speed * Mathf.PerlinNoise(Time.time * perlin, 0.0f);
+
         Move();
 
-        if(showingdamage && Time.time>damageDoneTime)
+       // speed = setSpeed();
+        //print(speed);
+        if (showingdamage && Time.time>damageDoneTime)
         {
             UnShowDamage();
         }
@@ -65,6 +74,29 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    //public float setSpeed()
+    //{
+    //    if (score.scoreInt < 10)
+    //    {
+    //        speed = 10f;
+    //    }
+    //    else if (score.scoreInt > 10 && score.scoreInt < 25)
+    //    {
+    //        speed = 15f;
+    //    }
+    //    else if (score.scoreInt > 25 && score.scoreInt < 50)
+    //    {
+    //        speed = 20f;
+    //    }
+    //    else
+    //    {
+    //        speed = 25f;
+    //    }
+
+
+    //    return speed;
+
+    //}
  
 
     public virtual void Move()
@@ -77,13 +109,13 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GameObject otherGo = collision.gameObject;
-
+     
         switch (otherGo.tag)
         {
             case "ProjectileHero":
                 Projectile p = otherGo.GetComponent<Projectile>();
                 showDamage();
-                kill = 0;
+                
                 if (!bndCheck.isOnScreen)
                 {
                     
@@ -91,18 +123,24 @@ public class Enemy : MonoBehaviour
                     break;
                 }
 
-                
                 health -= Main.getWeaponDefinition(p.type).damageOnHit;
                 if(health<=0)
                 {
-                    kill = 1;
+                    
+                    //kill = 1;
                     if (!notifiedOfDestruction)
                     {
                         Main.s.ShipDestroyed(this);
                     }
                     notifiedOfDestruction = true;
                     Destroy(this.gameObject);
+                    ScoreScript.S.UpdateScore();
                 }
+
+                //else
+                //{
+                //    kill = 0;
+                //}
 
                
                 Destroy(otherGo);
@@ -112,7 +150,8 @@ public class Enemy : MonoBehaviour
                 print("Enemy hit by non-projectileHero: " + otherGo.name);
                 break;
         }
-        ScoreScript.S.UpdateScore(kill);
+
+       
     }
 
     void showDamage()

@@ -299,6 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 2146614791}
+  scoreInt: 0
 --- !u!1 &353050663
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,7 +410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &518951092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,8 +644,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 950747330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.277235, y: -20.948, z: -26.87}
-  m_LocalScale: {x: 1, y: 0.4125, z: 1}
+  m_LocalPosition: {x: 2.277235, y: -11.1, z: -26.87}
+  m_LocalScale: {x: 1, y: 0.62390625, z: 1}
   m_Children:
   - {fileID: 1377764868}
   m_Father: {fileID: 0}
@@ -699,7 +700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &1049576333
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1002,8 +1003,6 @@ MonoBehaviour:
   - {fileID: 3714787751975615148, guid: 9683900a2818f49259aaad27ceb0a3e8, type: 3}
   - {fileID: 565353178334680740, guid: 3af96b4003ceb4112ac2dc33aaf0f87f, type: 3}
   - {fileID: 565353178334680740, guid: 3af96b4003ceb4112ac2dc33aaf0f87f, type: 3}
-  - {fileID: 5915968430594926211, guid: e333b1b8170da4453bdacde91c4faaa0, type: 3}
-  enemySpawnPerSecond: 0.5
   enemyDefaultPadding: 1.5
   weaponDefinitions:
   - type: 1
@@ -1035,9 +1034,21 @@ MonoBehaviour:
     continuousDamage: 0
     delayBetweenShots: 0
     velocity: 0
+  - type: 3
+    letter: P
+    color: {r: 1, g: 0.09019608, b: 0, a: 1}
+    projectilePreFab: {fileID: 407763580827844359, guid: 03647c1f2f1e6498991207f710459e1f,
+      type: 3}
+    projectileColor: {r: 1, g: 0.089728706, b: 0, a: 1}
+    damageOnHit: 3
+    continuousDamage: 0
+    delayBetweenShots: 0.8
+    velocity: 100
   prefabPowerUp: {fileID: 2562301352348712520, guid: e19d101f8044b4b65b9acdae9e073d45,
     type: 3}
-  powerUpFrequency: 01000000010000000200000006000000
+  powerUpFrequency: 0300000003000000030000000300000003000000
+  score: {fileID: 218888561}
+  enemySpawnPerSecond: 0.5
 --- !u!1001 &1134861469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1335,7 +1346,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377764864}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.277235, y: -53.9, z: 5.0837517}
+  m_LocalPosition: {x: -2.277235, y: -55.2, z: 5.0837517}
   m_LocalScale: {x: 73.31097, y: 28.511322, z: 101.6369}
   m_Children: []
   m_Father: {fileID: 950747331}
@@ -1353,6 +1364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91bfdda64e6e248e9b5ae288b2809e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: {fileID: 218888561}
 --- !u!64 &1377764870
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1513,7 +1525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &1773838026
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1758,7 +1770,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
-  pushSpeed: -40
   speedHolder: 0
   rollMult: -45
   pitchMult: 30
@@ -1773,13 +1784,14 @@ MonoBehaviour:
   - {fileID: 1453356128}
   - {fileID: 1418337614}
   HeroRigidbody: {fileID: 0}
-  pushDuration: 0
   pushDoneTime: 0
   invincibillity: 0
   invincibillityDuration: 1
   materials: []
   orignalColors: []
   _shieldLevel: 4
+  pushSpeed: -40
+  pushDuration: 0
 --- !u!114 &1858165742
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,7 +9,6 @@ public class Hero : MonoBehaviour
     [Header("Set in Inspector")]
 
     public float speed = 30;
-   
     public float speedHolder;
     public float rollMult = -45;
     public float pitchMult = 30;
@@ -19,8 +18,7 @@ public class Hero : MonoBehaviour
     public Weapon[] weapons;
     Vector3 moveDirectionPush;
     public Rigidbody HeroRigidbody;
-    bool shooting = false;
-    
+    bool shooting = false; 
     public float pushDoneTime;
     public float invincibillity;
     public float invincibillityDuration = 1.5f;
@@ -40,6 +38,7 @@ public class Hero : MonoBehaviour
     public WeaponFireDelegate fireDelegate;
     public float pushSpeed = -5;
     public float pushDuration = .1f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -155,18 +154,87 @@ public class Hero : MonoBehaviour
             //transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);
         }
 
-       if( weapons[0].type==WeaponType.blaster)
+       if(weapons[0].type==WeaponType.blaster)
         {
             pushDuration = .5f;
             pushSpeed = -20;
+            if (weapons[1].type== WeaponType.blaster)
+            {
+                pushDuration = .6f;
+                pushSpeed = -25;
+            }
+            if (weapons[2].type == WeaponType.blaster)
+            {
+                pushDuration = .7f;
+                pushSpeed = -30;
+            }
+            if (weapons[3].type == WeaponType.blaster)
+            {
+                pushDuration = .8f;
+                pushSpeed = -35;
+            }
+            if (weapons[4].type == WeaponType.blaster)
+            {
+                pushDuration = .9f;
+                pushSpeed = -40;
+            }
         }
 
        else if(weapons[0].type == WeaponType.spread)
         {
             pushDuration = .8f;
             pushSpeed = -40;
+
+            if (weapons[1].type == WeaponType.spread)
+            {
+                pushDuration = .8f;
+                pushSpeed = -45;
+            }
+            if (weapons[2].type == WeaponType.spread)
+            {
+                pushDuration = .9f;
+                pushSpeed = -50;
+            }
+            if (weapons[3].type == WeaponType.spread)
+            {
+                pushDuration = .9f;
+                pushSpeed = -60;
+            }
+            if (weapons[4].type == WeaponType.spread)
+            {
+                pushDuration = .9f;
+                pushSpeed = -70;
+            }
         }
 
+        else if (weapons[0].type == WeaponType.phaser)
+        {
+            pushDuration = .8f;
+            pushSpeed = -50;
+            if (weapons[1].type == WeaponType.phaser)
+            {
+                pushDuration = .9f;
+                pushSpeed = -60;
+            }
+            if (weapons[2].type == WeaponType.phaser)
+            {
+                pushDuration = .9f;
+                pushSpeed = -70;
+            }
+            if (weapons[3].type == WeaponType.phaser)
+            {
+                pushDuration = .9f;
+                pushSpeed = -80;
+            }
+            if (weapons[4].type == WeaponType.phaser)
+            {
+                pushDuration = .9f;
+                pushSpeed = -90;
+            }
+
+        }
+
+        print(pushSpeed);
         //if (bndCheck.heroDown)
         //{
         //    print("Off" );
@@ -201,7 +269,6 @@ public class Hero : MonoBehaviour
 
         else if (go.tag == "offDownCube")
         {
-
             shieldLevel--;
             Invincibillity(invincibillityDuration);
         }

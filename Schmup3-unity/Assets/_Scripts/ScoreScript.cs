@@ -7,7 +7,7 @@ public class ScoreScript : MonoBehaviour
 {
 
     public Text score;
-    private int scoreInt;
+    public int scoreInt;
     public static ScoreScript S;
 
     // Start is called before the first frame update
@@ -20,15 +20,22 @@ public class ScoreScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void UpdateScore(int kill)
+    public void UpdateScore()
     {
-        if (kill == 1)
-        {
+        //if (kill == 1)
+       // {
             scoreInt++;
-        }
+
+        //print( scoreInt);
+        //}
 
         DisplayScore();
 
+    }
+
+    public int getScore()
+    {
+        return (scoreInt);
     }
 
     private void DisplayScore()

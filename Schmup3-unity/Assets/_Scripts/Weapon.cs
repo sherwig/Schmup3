@@ -122,6 +122,10 @@ public class Weapon : MonoBehaviour
                 p.rigid.velocity = p.transform.rotation * vel;
                 break;
 
+             case WeaponType.phaser:
+                p = MakeProjectile();
+                p.rigid.velocity = vel*2.0f;
+                break;
         }
 
     }
