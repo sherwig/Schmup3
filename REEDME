@@ -1,0 +1,27 @@
+For the schmup I wanted to remix the genre of schmup itself. I wanted to try and create a game where the act of 
+shooting can have adverse consequences for the player. This means the player has to be considerate when firing.
+No longer can the  player just hold down the shoot button to consistently be firing. How I did this within my remix was 
+I implemented a knock back every time the player shoots. Depending on the strength of the weapon, and the number of weapons 
+the knock back differs. Meaning the strongest weapon with the most of that weapon means the most amount of push back. 
+This adds a level of meaningful choice where the player now wonders if they want to upgrade their ship weaponry or not. 
+
+The way player can get damaged from the pushback is their is now a moving red zone at the bottom of the screen and if the 
+player touches the area they lose health. The red area at the  bottom is mapped with perlin noise, so it is constantly 
+moving up and down. Additionally, it is score dependent so the higher your score, the farther the red area will move up 
+towards you. This was just to make it harder the longer you are alive. 
+
+One of the biggest notes I got from my playtesting was that  the game was too hard. To combat this I put in a more dynamic 
+enemy spawn rate. It is also based on the score,  so more enemies are spawned the higher your score. I also added in a score 
+to the game, but it is kind of bugged and isn’t counting fully correctly, but we are still in beta. 
+
+Next I added in a couple of new power ups. I added in a new weapon type, being a phaser. It is a very fast and powerful 
+weapon, but it has the most push back correlated with it, so it is a double edged sword. Next, I added in an invincibility 
+power up. If you pick up the power up you become invincible for 4 seconds, and can still fire. Both I feel are good additions 
+to the game especially with the notes of it being too difficult. 
+
+Other things I did was tweak a bunch of the book values to better suit my game. I changed power up drop rates and speed of 
+the enemies. I tried to dynamically change the speed of the enemies, but it didn’t seem to work out too well, so I just upped 
+the speed on most and tried to find  a happy medium. 
+
+Overall I  like how  my game came out. I feel like the concept behind it is interesting and I tried to design around that 
+main feature of knockback. The playtesters that I have had so far enjoy it, especially now that it is a little bit easier. 
