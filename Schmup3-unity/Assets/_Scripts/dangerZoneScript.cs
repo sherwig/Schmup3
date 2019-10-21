@@ -32,7 +32,7 @@ public class dangerZoneScript : MonoBehaviour
     void Update()
     {
         heightScale = heightSet();
-        float height = (heightScale * Mathf.PerlinNoise(Time.time * xScale, 0.0f))-40f;
+        float height = (heightScale * Mathf.PerlinNoise(Time.time * xScale, 0.0f))-45f;
         //print(height);
         Vector3 pos = transform.position;
         pos.y = height;

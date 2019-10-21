@@ -1044,9 +1044,19 @@ MonoBehaviour:
     continuousDamage: 0
     delayBetweenShots: 0.8
     velocity: 100
+  - type: 7
+    letter: I
+    color: {r: 0, g: 0, b: 1, a: 1}
+    projectilePreFab: {fileID: 407763580827844359, guid: 03647c1f2f1e6498991207f710459e1f,
+      type: 3}
+    projectileColor: {r: 0, g: 0, b: 1, a: 1}
+    damageOnHit: 0
+    continuousDamage: 0
+    delayBetweenShots: 0
+    velocity: 0
   prefabPowerUp: {fileID: 2562301352348712520, guid: e19d101f8044b4b65b9acdae9e073d45,
     type: 3}
-  powerUpFrequency: 0300000003000000030000000300000003000000
+  powerUpFrequency: 0700000007000000070000000700000007000000
   score: {fileID: 218888561}
   enemySpawnPerSecond: 0.5
 --- !u!1001 &1134861469
@@ -1346,8 +1356,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377764864}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.277235, y: -55.2, z: 5.0837517}
-  m_LocalScale: {x: 73.31097, y: 28.511322, z: 101.6369}
+  m_LocalPosition: {x: -2.277235, y: -58.9, z: 5.0837517}
+  m_LocalScale: {x: 73.31097, y: 36.70833, z: 101.6369}
   m_Children: []
   m_Father: {fileID: 950747331}
   m_RootOrder: 0

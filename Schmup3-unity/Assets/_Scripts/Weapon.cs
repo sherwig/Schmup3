@@ -10,7 +10,8 @@ public enum WeaponType
     phaser,
     missile,
     laster,
-    shield
+    shield,
+    invincibillity
 }
 
 

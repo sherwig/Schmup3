@@ -158,7 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showDamageDuration: 0.1
   powerUpDropChance: 0.5
-  speed: 10
+  speed: 18
   score: {fileID: 0}
   fireRate: 0.3
   health: 4

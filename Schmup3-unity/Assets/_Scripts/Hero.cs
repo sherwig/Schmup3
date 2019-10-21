@@ -166,17 +166,17 @@ public class Hero : MonoBehaviour
             if (weapons[2].type == WeaponType.blaster)
             {
                 pushDuration = .7f;
-                pushSpeed = -30;
+                pushSpeed = -35;
             }
             if (weapons[3].type == WeaponType.blaster)
             {
                 pushDuration = .8f;
-                pushSpeed = -35;
+                pushSpeed = -45;
             }
             if (weapons[4].type == WeaponType.blaster)
             {
                 pushDuration = .9f;
-                pushSpeed = -40;
+                pushSpeed = -60;
             }
         }
 
@@ -359,6 +359,9 @@ public class Hero : MonoBehaviour
         {
             case WeaponType.shield:
                 shieldLevel++;
+                break;
+            case WeaponType.invincibillity:
+                Invincibillity(2.5f);
                 break;
 
             default:
