@@ -361,7 +361,7 @@ public class Hero : MonoBehaviour
                 shieldLevel++;
                 break;
             case WeaponType.invincibillity:
-                Invincibillity(2.5f);
+                Invincibillity(4f);
                 break;
 
             default:
